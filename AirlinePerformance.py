@@ -76,7 +76,7 @@ app.layout = html.Div(children=[
                                 # TASK1: Add title to the dashboard
                                 # Enter your code below. Make sure you have correct formatting.
                                 html.H1(
-                                    children="US Domestic Airline Flights Performance",
+                                    children="US Domestic Airline Flights Performance Dashboard",
                                     style={'textAlign': 'center', 'color': '#503D36', 'font-size': '24px'}
                                 ),
                                 # REVIEW2: Dropdown creation
