@@ -11,6 +11,7 @@ from dash import no_update
 
 # Create a dash application
 app = dash.Dash(__name__)
+server = app.server
 
 # REVIEW1: Clear the layout and do not display exception till callback gets executed
 app.config.suppress_callback_exceptions = True
