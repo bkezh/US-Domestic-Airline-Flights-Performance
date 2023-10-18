@@ -24,7 +24,7 @@ airline_data =  pd.read_csv('https://cf-courses-data.s3.us.cloud-object-storage.
 
 
 # List of years 
-year_list = [i for i in range(2005, 2021, 1)]
+year_list = [i for i in range(2005, 2023, 1)]
 
 """Compute graph data for creating yearly airline performance report 
 
@@ -77,14 +77,14 @@ app.layout = html.Div(children=[
                                 # Enter your code below. Make sure you have correct formatting.
                                 html.H1(
                                     children="US Domestic Airline Flights Performance Dashboard",
-                                    style={'textAlign': 'center', 'color': '#503D36', 'font-size': '24px'}
+                                    style={'textAlign': 'center', 'color': '#503D36', 'font-size': '30px', 'padding-top': '20px', 'font-family':'sans-serif'}
                                 ),
                                 # REVIEW2: Dropdown creation
                                 html.Div([
                                     html.Div([
                                         html.Div(
                                             [
-                                                html.H2('Report Type:', style={'margin-right': '2em'})
+                                                html.H2('Report Type: ', style={'text-align': 'center', 'margin-top': '0.2em','font-family':'Roboto, sans-serif'})
                                             ]
                                         ),
                                         # TASK2: Add a dropdown
@@ -95,42 +95,44 @@ app.layout = html.Div(children=[
                                                 {'label': 'Yearly Airline Delay Report', 'value': 'OPT2'}
                                             ],
                                             placeholder="Select a report type",
-                                            style={'width': '80%', 'padding': '3px', 'font-size': '20px', 'text-align-last': 'center'}
+                                            style={'width': '100%', 'max-width': '300px','font-size': '15px', 'text-align-last': 'center','font-family':'Roboto, sans-serif'},
+                                            value='OPT1' 
                                         ),
-                                    ], style={'display': 'flex'}),
+                                    ], style={'flex': '1', 'margin': '10px', 'justify-content': 'center', 'display': 'flex', 'flex-wrap': 'wrap'}),
                                     
                                    # Add next division 
                                    html.Div([
                                        # Create an division for adding dropdown helper text for choosing year
                                         html.Div(
                                             [
-                                            html.H2('Choose Year:', style={'margin-right': '2em'})
+                                            html.H2('Choose Year: ', style={'text-align': 'center', 'margin-top': '0.2em','font-family':'Roboto, sans-serif'})
                                             ]
                                         ),
                                         dcc.Dropdown(id='input-year', 
                                                      # Update dropdown values using list comphrehension
                                                      options=[{'label': i, 'value': i} for i in year_list],
                                                      placeholder="Select a year",
-                                                     style={'width':'80%', 'padding':'3px', 'font-size': '20px', 'text-align-last' : 'center'}),
+                                                     style={'width':'100%',  'max-width': '300px','font-size': '15px', 'text-align-last' : 'center','font-family':'Roboto, sans-serif'},
+                                                     value = year_list[0] ),
                                             # Place them next to each other using the division style
-                                            ], style={'display': 'flex'}),  
-                                          ]),
+                                            ], style={'flex': '1', 'margin': '10px', 'justify-content': 'center','display': 'flex', 'flex-wrap': 'wrap'}),  
+                                          ], style={'text-align': 'center', 'display': 'flex', 'flex-wrap': 'wrap', 'justify-content': 'center', 'align-items': 'center','font-size': '15px'}),
                                 
                                 # Add Computed graphs
                                 # REVIEW3: Observe how we add an empty division and providing an id that will be updated during callback
                                 html.Div([ ], id='plot1'),
     
                                 html.Div([
-                                        html.Div([ ], id='plot2'),
-                                        html.Div([ ], id='plot3')
-                                ], style={'display': 'flex'}),
+                                        html.Div([ ], id='plot2', style={'width': '50%','font-family':'Roboto, sans-serif'}),
+                                        html.Div([ ], id='plot3', style={'width': '50%','font-family':'Roboto, sans-serif'})
+                                ],style={'display': 'flex', 'flex-wrap': 'wrap', 'justify-content': 'center', 'align-items': 'center'}),
                                 
                                 # TASK3: Add a division with two empty divisions inside.
                                 html.Div([
-                                    html.Div([], id='plot4'),
-                                    html.Div([], id='plot5')
-                                ], style={'display': 'flex'}),
-                            ])
+                                    html.Div([], id='plot4', style={'font-family':'Roboto, sans-serif'}),
+                                    html.Div([], id='plot5', style={'font-family':'Roboto, sans-serif'})
+                                ]),
+                            ], style={'max-width': '1200px', 'margin': '0 auto', 'font-family': 'Roboto, sans-serif'})
 
 # Callback function definition
 # TASK4: Add 5 ouput components
@@ -165,7 +167,7 @@ def get_graph(chart, year, children1, children2, children3, children4, children5
             line_fig = px.line(line_data, x='Month', y='AirTime', color='Reporting_Airline', title='Average monthly flight time (minutes) by airline')
             
             # Percentage of diverted airport landings per reporting airline
-            pie_fig = px.pie(div_data, values='Flights', names='Reporting_Airline', title='% of flights by reporting airline')
+            pie_fig = px.pie(div_data, values='Flights', names='Reporting_Airline', title='Percentage of flights by reporting airline')
             
             # REVIEW5: Number of flights flying from each state using choropleth
             map_fig = px.choropleth(map_data,  # Input data
