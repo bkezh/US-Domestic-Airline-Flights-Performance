@@ -161,13 +161,25 @@ def get_graph(chart, year, children1, children2, children3, children4, children5
             
             # Number of flights under different cancellation categories
             bar_fig = px.bar(bar_data, x='Month', y='Flights', color='CancellationCode', title='Monthly Flight Cancellation')
+            bar_fig.update_layout(
+                plot_bgcolor='#F6F8FA',  # Background color of the plot
+                paper_bgcolor='#F6F8FA'  
+            )
             
             # TASK5: Average flight time by reporting airline
             # Enter your code below. Make sure you have correct formatting.
             line_fig = px.line(line_data, x='Month', y='AirTime', color='Reporting_Airline', title='Average monthly flight time (minutes) by airline')
+            line_fig.update_layout(
+                plot_bgcolor='#F6F8FA',  # Background color of the plot
+                paper_bgcolor='#F6F8FA'  
+            )
             
             # Percentage of diverted airport landings per reporting airline
             pie_fig = px.pie(div_data, values='Flights', names='Reporting_Airline', title='Percentage of flights by reporting airline')
+            pie_fig.update_layout(
+                plot_bgcolor='#F6F8FA',  # Background color of the plot
+                paper_bgcolor='#F6F8FA'  
+            )
             
             # REVIEW5: Number of flights flying from each state using choropleth
             map_fig = px.choropleth(map_data,  # Input data
@@ -179,7 +191,9 @@ def get_graph(chart, year, children1, children2, children3, children4, children5
                     range_color=[0, map_data['Flights'].max()]) 
             map_fig.update_layout(
                     title_text = 'Number of flights from origin state', 
-                    geo_scope='usa') # Plot only the USA instead of globe
+                    geo_scope='usa',
+                    plot_bgcolor='#F6F8FA',  # Background color of the plot
+                    paper_bgcolor='#F6F8FA'  ) # Plot only the USA instead of globe
             
             # TASK6: Number of flights flying to each state from each reporting airline
             # Enter your code below. Make sure you have correct formatting.
@@ -189,6 +203,10 @@ def get_graph(chart, year, children1, children2, children3, children4, children5
                               color='Flights',
                               color_continuous_scale='RdBu',
                               title='Flight count by airline to destination state')
+            tree_fig.update_layout(
+                plot_bgcolor='#F6F8FA',  # Background color of the plot
+                paper_bgcolor='#F6F8FA'  
+            )
             
             
             # REVIEW6: Return dcc.Graph component to the empty division
@@ -205,10 +223,30 @@ def get_graph(chart, year, children1, children2, children3, children4, children5
             
             # Create graph
             carrier_fig = px.line(avg_car, x='Month', y='CarrierDelay', color='Reporting_Airline', title='Average carrrier delay time (minutes) by airline')
+            carrier_fig.update_layout(
+                plot_bgcolor='#F6F8FA',  # Background color of the plot
+                paper_bgcolor='#F6F8FA'  
+            )
             weather_fig = px.line(avg_weather, x='Month', y='WeatherDelay', color='Reporting_Airline', title='Average weather delay time (minutes) by airline')
+            weather_fig.update_layout(
+                plot_bgcolor='#F6F8FA',  # Background color of the plot
+                paper_bgcolor='#F6F8FA'  
+            )
             nas_fig = px.line(avg_NAS, x='Month', y='NASDelay', color='Reporting_Airline', title='Average NAS delay time (minutes) by airline')
+            nas_fig.update_layout(
+                plot_bgcolor='#F6F8FA',  # Background color of the plot
+                paper_bgcolor='#F6F8FA'  
+            )
             sec_fig = px.line(avg_sec, x='Month', y='SecurityDelay', color='Reporting_Airline', title='Average security delay time (minutes) by airline')
+            sec_fig.update_layout(
+                plot_bgcolor='#F6F8FA',  # Background color of the plot
+                paper_bgcolor='#F6F8FA'  
+            )
             late_fig = px.line(avg_late, x='Month', y='LateAircraftDelay', color='Reporting_Airline', title='Average late aircraft delay time (minutes) by airline')
+            late_fig.update_layout(
+                plot_bgcolor='#F6F8FA',  # Background color of the plot
+                paper_bgcolor='#F6F8FA'  
+            )
             
             return[dcc.Graph(figure=carrier_fig), 
                    dcc.Graph(figure=weather_fig), 
