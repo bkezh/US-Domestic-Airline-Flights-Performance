@@ -1,3 +1,6 @@
 dash==2.14.0
 pandas
-gunicorn
+Flask==2.2.2
+gunicorn==20.1.0
+requests==2.28.1
+Werkzeug==2.2.2
