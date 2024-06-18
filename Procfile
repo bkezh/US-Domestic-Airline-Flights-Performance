@@ -1,1 +1,1 @@
-web: python AirlinePerformance.py
+web: gunicorn app:app --timeout 120
