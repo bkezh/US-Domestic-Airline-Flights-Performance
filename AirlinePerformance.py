@@ -257,4 +257,4 @@ def get_graph(chart, year, children1, children2, children3, children4, children5
 
 # Run the app
 if __name__ == '__main__':
-    app.run_server()
+    app.run_server(debug=True)
