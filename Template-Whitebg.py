@@ -8,6 +8,7 @@ import plotly.graph_objects as go
 import plotly.express as px
 from dash import no_update
 
+
 # Create a dash application
 app = dash.Dash(__name__)
 server = app.server
@@ -20,6 +21,7 @@ airline_data =  pd.read_csv('https://cf-courses-data.s3.us.cloud-object-storage.
                             encoding = "ISO-8859-1",
                             dtype={'Div1Airport': str, 'Div1TailNum': str, 
                                    'Div2Airport': str, 'Div2TailNum': str})
+
 
 # List of years 
 year_list = [i for i in range(2005, 2023, 1)]
@@ -75,14 +77,14 @@ app.layout = html.Div(children=[
                                 # Enter your code below. Make sure you have correct formatting.
                                 html.H1(
                                     children="US Domestic Airline Flights Performance Dashboard",
-                                    style={'textAlign': 'center', 'color': 'white', 'font-size': '30px', 'padding-top': '20px', 'font-family':'sans-serif'}
+                                    style={'textAlign': 'center', 'color': '#503D36', 'font-size': '30px', 'padding-top': '20px', 'font-family':'sans-serif'}
                                 ),
                                 # REVIEW2: Dropdown creation
                                 html.Div([
                                     html.Div([
                                         html.Div(
                                             [
-                                                html.H2('Report Type: ', style={'text-align': 'center', 'margin-top': '0.2em','font-family':'Roboto, sans-serif', 'color': 'white'})
+                                                html.H2('Report Type: ', style={'text-align': 'center', 'margin-top': '0.2em','font-family':'Roboto, sans-serif'})
                                             ]
                                         ),
                                         # TASK2: Add a dropdown
@@ -93,7 +95,7 @@ app.layout = html.Div(children=[
                                                 {'label': 'Yearly Airline Delay Report', 'value': 'OPT2'}
                                             ],
                                             placeholder="Select a report type",
-                                            style={'width': '100%', 'max-width': '300px','font-size': '15px', 'text-align-last': 'center','font-family':'Roboto, sans-serif','color': '#1a1a1a'},
+                                            style={'width': '100%', 'max-width': '300px','font-size': '15px', 'text-align-last': 'center','font-family':'Roboto, sans-serif'},
                                             value='OPT1' 
                                         ),
                                     ], style={'flex': '1', 'margin': '10px', 'justify-content': 'center', 'display': 'flex', 'flex-wrap': 'wrap'}),
@@ -103,7 +105,7 @@ app.layout = html.Div(children=[
                                        # Create an division for adding dropdown helper text for choosing year
                                         html.Div(
                                             [
-                                            html.H2('Choose Year: ', style={'text-align': 'center', 'margin-top': '0.2em','font-family':'Roboto, sans-serif', 'color': 'white'})
+                                            html.H2('Choose Year: ', style={'text-align': 'center', 'margin-top': '0.2em','font-family':'Roboto, sans-serif'})
                                             ]
                                         ),
                                         dcc.Dropdown(id='input-year', 
@@ -114,7 +116,7 @@ app.layout = html.Div(children=[
                                                      value = year_list[0] ),
                                             # Place them next to each other using the division style
                                             ], style={'flex': '1', 'margin': '10px', 'justify-content': 'center','display': 'flex', 'flex-wrap': 'wrap'}),  
-                                          ], style={'text-align': 'center', 'display': 'flex', 'flex-wrap': 'wrap', 'justify-content': 'center', 'align-items': 'center','font-size': '15px', 'color': '#1a1a1a'}),
+                                          ], style={'text-align': 'center', 'display': 'flex', 'flex-wrap': 'wrap', 'justify-content': 'center', 'align-items': 'center','font-size': '15px'}),
                                 
                                 # Add Computed graphs
                                 # REVIEW3: Observe how we add an empty division and providing an id that will be updated during callback
@@ -130,7 +132,7 @@ app.layout = html.Div(children=[
                                     html.Div([], id='plot4', style={'font-family':'Roboto, sans-serif'}),
                                     html.Div([], id='plot5', style={'font-family':'Roboto, sans-serif'})
                                 ]),
-                            ], style={'max-width': '1400px', 'margin': '0 auto', 'font-family': 'Roboto, sans-serif', 'background': 'linear-gradient(to right, #1a1a1a, #333333)', 'color': 'white', 'padding': '20px', 'border-radius': '10px', 'box-shadow': '0 4px 8px 0 rgba(0,0,0,0.2)'})
+                            ], style={'max-width': '1200px', 'margin': '0 auto', 'font-family': 'Roboto, sans-serif'})
 
 # Callback function definition
 # TASK4: Add 5 ouput components
@@ -160,29 +162,23 @@ def get_graph(chart, year, children1, children2, children3, children4, children5
             # Number of flights under different cancellation categories
             bar_fig = px.bar(bar_data, x='Month', y='Flights', color='CancellationCode', title='Monthly Flight Cancellation')
             bar_fig.update_layout(
-                plot_bgcolor='#1a1a1a',  # Background color of the plot
-                paper_bgcolor='#1a1a1a',  # Background color of the paper
-                font=dict(color='white'),  # Text color
-                title=dict(font=dict(color='white'))
+                plot_bgcolor='#F6F8FA',  # Background color of the plot
+                paper_bgcolor='#F6F8FA'  
             )
             
             # TASK5: Average flight time by reporting airline
             # Enter your code below. Make sure you have correct formatting.
             line_fig = px.line(line_data, x='Month', y='AirTime', color='Reporting_Airline', title='Average monthly flight time (minutes) by airline')
             line_fig.update_layout(
-                plot_bgcolor='#1a1a1a',  # Background color of the plot
-                paper_bgcolor='#1a1a1a',  # Background color of the paper
-                font=dict(color='white'),  # Text color
-                title=dict(font=dict(color='white'))
+                plot_bgcolor='#F6F8FA',  # Background color of the plot
+                paper_bgcolor='#F6F8FA'  
             )
             
             # Percentage of diverted airport landings per reporting airline
             pie_fig = px.pie(div_data, values='Flights', names='Reporting_Airline', title='Percentage of flights by reporting airline')
             pie_fig.update_layout(
-                plot_bgcolor='#1a1a1a',  # Background color of the plot
-                paper_bgcolor='#1a1a1a',  # Background color of the paper
-                font=dict(color='white'),  # Text color
-                title=dict(font=dict(color='white'))
+                plot_bgcolor='#F6F8FA',  # Background color of the plot
+                paper_bgcolor='#F6F8FA'  
             )
             
             # REVIEW5: Number of flights flying from each state using choropleth
@@ -196,11 +192,8 @@ def get_graph(chart, year, children1, children2, children3, children4, children5
             map_fig.update_layout(
                     title_text = 'Number of flights from origin state', 
                     geo_scope='usa',
-                    plot_bgcolor='#1a1a1a',  # Background color of the plot
-                    paper_bgcolor='#1a1a1a',  # Background color of the paper
-                    font=dict(color='white'),  # Text color
-                    title=dict(font=dict(color='white'))  # Title text color
-            )
+                    plot_bgcolor='#F6F8FA',  # Background color of the plot
+                    paper_bgcolor='#F6F8FA'  ) # Plot only the USA instead of globe
             
             # TASK6: Number of flights flying to each state from each reporting airline
             # Enter your code below. Make sure you have correct formatting.
@@ -211,11 +204,10 @@ def get_graph(chart, year, children1, children2, children3, children4, children5
                               color_continuous_scale='RdBu',
                               title='Flight count by airline to destination state')
             tree_fig.update_layout(
-                plot_bgcolor='#1a1a1a',  # Background color of the plot
-                paper_bgcolor='#1a1a1a',  # Background color of the paper
-                font=dict(color='white'),  # Text color
-                title=dict(font=dict(color='white'))
+                plot_bgcolor='#F6F8FA',  # Background color of the plot
+                paper_bgcolor='#F6F8FA'  
             )
+            
             
             # REVIEW6: Return dcc.Graph component to the empty division
             return [dcc.Graph(figure=tree_fig), 
@@ -232,38 +224,28 @@ def get_graph(chart, year, children1, children2, children3, children4, children5
             # Create graph
             carrier_fig = px.line(avg_car, x='Month', y='CarrierDelay', color='Reporting_Airline', title='Average carrrier delay time (minutes) by airline')
             carrier_fig.update_layout(
-                plot_bgcolor='#1a1a1a',  # Background color of the plot
-                paper_bgcolor='#1a1a1a',  # Background color of the paper
-                font=dict(color='white'),  # Text color
-                title=dict(font=dict(color='white'))
+                plot_bgcolor='#F6F8FA',  # Background color of the plot
+                paper_bgcolor='#F6F8FA'  
             )
             weather_fig = px.line(avg_weather, x='Month', y='WeatherDelay', color='Reporting_Airline', title='Average weather delay time (minutes) by airline')
             weather_fig.update_layout(
-                plot_bgcolor='#1a1a1a',  # Background color of the plot
-                paper_bgcolor='#1a1a1a',  # Background color of the paper
-                font=dict(color='white'),  # Text color
-                title=dict(font=dict(color='white'))
+                plot_bgcolor='#F6F8FA',  # Background color of the plot
+                paper_bgcolor='#F6F8FA'  
             )
             nas_fig = px.line(avg_NAS, x='Month', y='NASDelay', color='Reporting_Airline', title='Average NAS delay time (minutes) by airline')
             nas_fig.update_layout(
-                plot_bgcolor='#1a1a1a',  # Background color of the plot
-                paper_bgcolor='#1a1a1a',  # Background color of the paper
-                font=dict(color='white'),  # Text color
-                title=dict(font=dict(color='white'))
+                plot_bgcolor='#F6F8FA',  # Background color of the plot
+                paper_bgcolor='#F6F8FA'  
             )
             sec_fig = px.line(avg_sec, x='Month', y='SecurityDelay', color='Reporting_Airline', title='Average security delay time (minutes) by airline')
             sec_fig.update_layout(
-                plot_bgcolor='#1a1a1a',  # Background color of the plot
-                paper_bgcolor='#1a1a1a',  # Background color of the paper
-                font=dict(color='white'),  # Text color
-                title=dict(font=dict(color='white'))
+                plot_bgcolor='#F6F8FA',  # Background color of the plot
+                paper_bgcolor='#F6F8FA'  
             )
             late_fig = px.line(avg_late, x='Month', y='LateAircraftDelay', color='Reporting_Airline', title='Average late aircraft delay time (minutes) by airline')
             late_fig.update_layout(
-                plot_bgcolor='#1a1a1a',  # Background color of the plot
-                paper_bgcolor='#1a1a1a',  # Background color of the paper
-                font=dict(color='white'),  # Text color
-                title=dict(font=dict(color='white'))
+                plot_bgcolor='#F6F8FA',  # Background color of the plot
+                paper_bgcolor='#F6F8FA'  
             )
             
             return[dcc.Graph(figure=carrier_fig), 
